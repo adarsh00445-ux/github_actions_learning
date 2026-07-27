@@ -1,10 +1,35 @@
-name: first_github_workflow
+name: Second GitHub Actions File Day 2
 
-on: [push]
+on:
+  push:
+
+env:
+  NAME: Adarsh
+  PURPOSE: Learning GitHub Actions
 
 jobs:
-  hello:
+  printing:
     runs-on: ubuntu-latest
+
     steps:
-    - name: say hello
-      run: echo "hello actions"
+      - name: Checkout My Repository
+        uses: actions/checkout@v4
+
+      - name: Print Name
+        run: echo "Your name is $NAME"
+
+      - name: Print Purpose
+        run: echo "Purpose: $PURPOSE"
+
+      - name: Show Current Directory
+        run: pwd
+
+      - name: List Repository Files
+        run: ls -la
+
+      - name: Read Special File
+        run: cat special_file.txt
+
+      - name: Run Only on Main Branch
+        if: github.ref == 'refs/heads/main'
+        run: echo "This workflow is running on the main branch"
